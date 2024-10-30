@@ -17,16 +17,16 @@ public class Coord {
         this.col = col;
     }
 
-    private static int asInt(String row) {
+    public static int asInt(String row) {
         return ALPHABET.indexOf(row);
     }
 
-    private static String asString(int row) {
+    public static String asString(int row) {
         return ALPHABET.get(row);
     }
 
-    private String getCoordString() {
-        return "(" + asString(row) + "," + col + ")";
+    public String getCoordString() {
+        return "(" + asString(row) + ", " + col + ")";
     }
 
     public Coord(String rowCol) {
