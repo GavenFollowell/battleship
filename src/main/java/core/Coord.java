@@ -6,7 +6,7 @@ public class Coord {
 
     private static final List<String> ALPHABET =
             List.of(
-                    " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "I", "K", "I", "J", "N", "O",
+                    " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
                     "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
 
     public final int row;
@@ -33,5 +33,12 @@ public class Coord {
         String[] coords = rowCol.split("");
         this.row = asInt(coords[0]);
         this.col = Integer.parseInt(coords[1]);
+    }
+
+    public boolean isEqual(Coord other) {
+        if (this.col == other.col && this.row == other.row) {
+            return true;
+        }
+        return false;
     }
 }

@@ -30,4 +30,18 @@ class CoordTest {
         assertEquals(2, coord.row);
         assertEquals(3, coord.col);
     }
+
+    @Test
+    public void isEqualReturnsTrue() {
+        Coord coord = new Coord(1, 2);
+        Coord coord2 = new Coord(1, 2);
+        assertTrue(coord.isEqual(coord2));
+    }
+
+    @Test
+    public void isEqualReturnsFalse() {
+        Coord coord = new Coord(1, 2);
+        Coord coord2 = new Coord(3, 3);
+        assertFalse(coord.isEqual(coord2));
+    }
 }

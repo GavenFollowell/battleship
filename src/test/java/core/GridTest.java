@@ -15,10 +15,22 @@ class GridTest {
 
     @Test
     public void aNewGridHasNoneNullCells() {
-        for (int i = 0; i < testGrid.numRows(); i++) {
-            for (int j = 0; j < testGrid.numCols(); j++) {
-                assertNotEquals(null, testGrid.get(i, j));
+        for (int i = 1; i <= testGrid.numRows(); i++) {
+            for (int j = 1; j <= testGrid.numCols(); j++) {
+                assertNotEquals(null, testGrid.get(new Coord(i, j)));
             }
         }
+    }
+
+    @Test
+    public void isTheCoordinateWithinGrid() {
+        Boolean result = testGrid.isValid(new Coord(3, 2));
+        assertEquals(true, result);
+    }
+
+    @Test
+    public void isTheCoordinateNotWithinGrid() {
+        Boolean result = testGrid.isValid(new Coord(5, 6));
+        assertEquals(false, result);
     }
 }

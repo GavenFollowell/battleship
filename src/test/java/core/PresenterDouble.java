@@ -15,5 +15,5 @@ public class PresenterDouble implements Presenter {
         // TODO
     }
 
-    public void offerChoice(String prompt, Map<String, Runnable> choices) {}
+    public void displayOptions(String prompt, Map<String, Runnable> choices) {}
 }
