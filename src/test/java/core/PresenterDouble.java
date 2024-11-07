@@ -15,5 +15,9 @@ public class PresenterDouble implements Presenter {
         // TODO
     }
 
+    public Coord askForCoordinate(Grid g) {
+        return null;
+    }
+
     public void displayOptions(String prompt, Map<String, Runnable> choices) {}
 }

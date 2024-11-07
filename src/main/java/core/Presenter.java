@@ -7,5 +7,7 @@ public interface Presenter {
 
     void displayGrid(Grid g);
 
+    Coord askForCoordinate(Grid g);
+
     void displayOptions(String prompt, Map<String, Runnable> choices);
 }
