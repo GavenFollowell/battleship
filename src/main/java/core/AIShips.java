@@ -18,13 +18,21 @@ class AIShips {
 
     public void setShips() {
         int current_ship = 0;
+        int tries = 0;
         while (current_ship != shipSpecs.length) {
             Ship newShip = getShip(shipSpecs[current_ship]);
             if (newShip.isOnGrid(grid)) {
                 if (!conflicts(newShip)) {
                     ships.add(newShip);
                     current_ship += 1;
+                    tries = 0;
                 }
+            }
+            tries++;
+            if (tries == 10) {
+                current_ship = 0;
+                tries = 0;
+                ships.clear();
             }
         }
     }

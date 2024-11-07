@@ -41,4 +41,8 @@ public class Coord {
         }
         return false;
     }
+
+    public Coord shiftBy(int verticalDistance, int horizontalDistance) {
+        return new Coord(this.row + verticalDistance, this.col + horizontalDistance);
+    }
 }

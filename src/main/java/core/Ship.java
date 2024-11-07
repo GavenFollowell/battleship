@@ -57,11 +57,11 @@ public class Ship {
         List<Coord> coordList = new ArrayList<Coord>();
         if (direction == Direction.HORIZONTAL) {
             for (int i = 0; i < this.size; i++) {
-                coordList.add(new Coord(startcoordinate.row, startcoordinate.col + i));
+                coordList.add(startcoordinate.shiftBy(0, i));
             }
         } else {
             for (int i = 0; i < this.size; i++) {
-                coordList.add(new Coord(startcoordinate.row + i, startcoordinate.col));
+                coordList.add(startcoordinate.shiftBy(i, 0));
             }
         }
         return coordList;
