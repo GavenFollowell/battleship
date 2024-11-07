@@ -10,16 +10,14 @@ public class Ship {
         VERTICAL
     }
 
-    private int startRow;
-    private int startCol;
+    private Coord startcoordinate;
     private int size;
     private Direction direction;
     private String name;
     private List<Coord> coordList;
 
     public Ship(Coord coordinate, int size, Direction direction, String name) {
-        this.startRow = coordinate.row;
-        this.startCol = coordinate.col;
+        this.startcoordinate = coordinate;
         this.size = size;
         this.direction = direction;
         this.name = name;
@@ -31,11 +29,11 @@ public class Ship {
     }
 
     public int getStartRow() {
-        return startRow;
+        return startcoordinate.row;
     }
 
     public int getStartCol() {
-        return startCol;
+        return startcoordinate.col;
     }
 
     public Direction getDirection() {
@@ -59,11 +57,11 @@ public class Ship {
         List<Coord> coordList = new ArrayList<Coord>();
         if (direction == Direction.HORIZONTAL) {
             for (int i = 0; i < this.size; i++) {
-                coordList.add(new Coord(startRow, startCol + i));
+                coordList.add(new Coord(startcoordinate.row, startcoordinate.col + i));
             }
         } else {
             for (int i = 0; i < this.size; i++) {
-                coordList.add(new Coord(startRow + i, startCol));
+                coordList.add(new Coord(startcoordinate.row + i, startcoordinate.col));
             }
         }
         return coordList;
