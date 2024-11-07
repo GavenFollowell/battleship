@@ -141,7 +141,7 @@ class TextPresenterTest {
         Grid grid = new Grid(2, 3);
         TextPresenter presenter = new TextPresenter(ioProvider);
         Cell cell = grid.get(new Coord(1, 1));
-        cell.setAsShot();
+        cell.setAsHit();
         presenter.displayGrid(grid);
         String expected =
                 "     1   2   3 \n"
@@ -159,9 +159,9 @@ class TextPresenterTest {
         Grid g = new Grid(5, 7);
         TextPresenter presenter = new TextPresenter(ioProvider);
 
-        g.get(new Coord(1, 1)).setAsShot();
-        g.get(new Coord(4, 5)).setAsShot();
-        g.get(new Coord(5, 7)).setAsShot();
+        g.get(new Coord(1, 1)).setAsHit();
+        g.get(new Coord(4, 5)).setAsHit();
+        g.get(new Coord(5, 7)).setAsHit();
         g.get(new Coord(2, 6)).setAsMiss();
         g.get(new Coord(3, 2)).setAsShip();
 

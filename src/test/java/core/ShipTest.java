@@ -52,10 +52,13 @@ class ShipTest {
         Coord c1 = new Coord(1, 2);
         Coord c2 = new Coord(2, 2);
         Coord c3 = new Coord(3, 2);
-        grid.get(c1).setAsHit();
-        grid.get(c2).setAsHit();
+        grid.get(c1).setAsShip();
+        grid.get(c2).setAsShip();
+        grid.get(c3).setAsShip();
+        grid.get(c1).setAsShot();
+        grid.get(c2).setAsShot();
         assertFalse(ship.isSunk(grid));
-        grid.get(c3).setAsHit();
+        grid.get(c3).setAsShot();
         assertTrue(ship.isSunk(grid));
     }
 

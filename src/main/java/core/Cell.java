@@ -4,21 +4,15 @@ package core;
 public class Cell {
     private boolean shot;
     private boolean ship;
-    private boolean hit;
-    private boolean miss;
 
     public Cell() {
         this.shot = false;
         this.ship = false;
-        this.hit = false;
-        this.miss = false;
     }
 
     public Cell(boolean ship) {
         this.ship = ship;
         this.shot = false;
-        this.hit = false;
-        this.miss = false;
     }
 
     public boolean isEmpty() {
@@ -37,28 +31,18 @@ public class Cell {
 
     // the shot on this cell resulted in a hit
     public boolean cellIsHit() {
-        return this.hit;
+        if (this.hasBeenShot() && this.hasShip()) {
+            return true;
+        }
+        return false;
     }
 
     // shot on this cell resulted in a miss
     public boolean cellIsMiss() {
-        return this.miss;
-    }
-
-    // shot and hit if it contains a ship
-    public void hit() {
-        if (!hasBeenShot() && hasShip()) { // Ensure shot hasn't been made yet
-            setAsShot();
-            setAsHit();
+        if (this.hasBeenShot() && !this.hasShip()) {
+            return true;
         }
-    }
-
-    // Handle a miss on the cell
-    public void miss() {
-        if (!hasBeenShot() && !hasShip()) { // Ensure shot hasn't been made yet
-            setAsShot();
-            setAsMiss();
-        }
+        return false;
     }
 
     // Mark the cell as shot
@@ -71,21 +55,19 @@ public class Cell {
         this.ship = true;
     }
 
-    // Mark the cell as a miss
-    public void setAsMiss() {
-        this.miss = true;
+    public void setAsHit() {
+        this.ship = true;
+        this.shot = true;
     }
 
-    // Mark the cell as a hit
-    public void setAsHit() {
-        this.hit = true;
+    public void setAsMiss() {
+        this.shot = true;
+        this.ship = false;
     }
 
     // Reset the cell to its initial state
     public void reset() {
         this.shot = false;
         this.ship = false;
-        this.hit = false;
-        this.miss = false;
     }
 }

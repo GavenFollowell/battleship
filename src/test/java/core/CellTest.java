@@ -15,6 +15,22 @@ class CellTest {
     }
 
     @Test
+    void returnsIsHitCorrectlyWithShipAndShot() {
+        Cell cell = new Cell(true);
+        cell.setAsShot();
+        assertTrue(cell.cellIsHit());
+        assertFalse(cell.cellIsMiss());
+    }
+
+    @Test
+    void returnsIsMissCorrectlyWithNoShipAndShot() {
+        Cell cell = new Cell(false);
+        cell.setAsShot();
+        assertFalse(cell.cellIsHit());
+        assertTrue(cell.cellIsMiss());
+    }
+
+    @Test
     void cellCanBeMadeWithATrueSHipValue() {
         Cell cell = new Cell(true);
         assertFalse(cell.isEmpty());
@@ -40,14 +56,12 @@ class CellTest {
         assertTrue(cell.isEmpty());
         assertTrue(cell.hasBeenShot());
         assertFalse(cell.cellIsHit());
-        assertFalse(cell.cellIsMiss());
     }
 
     @Test
-    void canMarkShipAsHit() {
+    void cellWithShipThatHasBeenShotReturnsTrueForIsHit() {
         Cell cell = new Cell(true);
         cell.setAsShot();
-        cell.setAsHit();
         assertFalse(cell.isEmpty());
         assertTrue(cell.hasBeenShot());
         assertTrue(cell.cellIsHit());
@@ -55,30 +69,13 @@ class CellTest {
     }
 
     @Test
-    void canMarkShipAsMiss() {
+    void cellWithoutShipThatHasNotBeenShotReturnsTrueForIsMiss() {
         Cell cell = new Cell();
         cell.setAsShot();
-        cell.setAsMiss();
         assertTrue(cell.isEmpty());
         assertTrue(cell.hasBeenShot());
         assertFalse(cell.cellIsHit());
         assertTrue(cell.cellIsMiss());
-    }
-
-    @Test
-    void cantMarkAnEmptyCellAsHit() {
-        Cell cell = new Cell();
-        cell.setAsShot();
-        cell.hit();
-        assertFalse(cell.cellIsHit());
-    }
-
-    @Test
-    void cantMarkAShipCellSpaceAsMiss() {
-        Cell cell = new Cell(true);
-        cell.setAsShot();
-        cell.miss();
-        assertFalse(cell.cellIsMiss());
     }
 
     @Test
@@ -87,22 +84,6 @@ class CellTest {
         assertFalse(cell.isEmpty());
     }
 
-    /*
-    @Test
-    void hittingWithoutBeingShotDoesNotMarkAsHit() {
-        Cell cell = new Cell(true);
-        cell.hit();
-        assertFalse(cell.cellIsHit());
-    }
-
-    @Test
-    void missingWithoutBeingShotDoesNotMarkAsMiss() {
-        Cell cell = new Cell();
-        cell.miss();
-        assertFalse(cell.cellIsMiss());
-    }
-    */
-
     @Test
     void settingAsShotMultipleTimesDoesNotChangeState() {
         Cell cell = new Cell();
@@ -110,26 +91,21 @@ class CellTest {
         cell.setAsShot();
         assertTrue(cell.hasBeenShot());
         assertFalse(cell.cellIsHit());
-        assertFalse(cell.cellIsMiss());
     }
 
     @Test
-    void settingAsHitThenMissDoesNotChangeStateToMiss() {
+    void resetSetsAllVariablesToFalse() {
         Cell cell = new Cell(true);
         cell.setAsShot();
-        cell.setAsHit();
-        cell.miss();
-        assertTrue(cell.cellIsHit());
-        assertFalse(cell.cellIsMiss());
+        cell.reset();
+        assertFalse(cell.hasBeenShot());
+        assertFalse(cell.cellIsHit());
     }
 
     @Test
-    void settingAsMissThenHitDoesNotChangeStateToHit() {
-        Cell cell = new Cell();
-        cell.setAsShot();
-        cell.setAsMiss();
-        cell.hit();
-        assertFalse(cell.cellIsHit());
-        assertTrue(cell.cellIsMiss());
+    void setAsHitWorks() {
+        Cell cell = new Cell(false);
+        cell.setAsHit();
+        assertTrue(cell.cellIsHit());
     }
 }

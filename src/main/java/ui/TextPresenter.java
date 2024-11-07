@@ -69,7 +69,7 @@ public class TextPresenter implements Presenter {
     }
 
     private void setCellAs(Cell cell) {
-        if (cell.hasBeenShot()) {
+        if (cell.cellIsHit()) {
             output.print("  " + "X" + " ");
         } else if (cell.hasShip()) {
             output.print("  " + "~" + " ");
