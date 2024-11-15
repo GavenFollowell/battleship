@@ -21,7 +21,7 @@ public class Ship {
         this.size = size;
         this.direction = direction;
         this.name = name;
-        this.coordList = getCoordList();
+        this.coordList = genCoordList();
     }
 
     public int getSize() {
@@ -53,7 +53,7 @@ public class Ship {
         return false;
     }
 
-    public List<Coord> getCoordList() {
+    private List<Coord> genCoordList() {
         List<Coord> coordList = new ArrayList<Coord>();
         if (direction == Direction.HORIZONTAL) {
             for (int i = 0; i < this.size; i++) {
@@ -67,6 +67,10 @@ public class Ship {
         return coordList;
     }
 
+    public List<Coord> getCoordList() {
+        return coordList;
+    }
+
     public boolean isSunk(Grid grid) {
         for (Coord coord : coordList) {
             if (!(grid.get(coord).cellIsHit())) {
@@ -77,7 +81,7 @@ public class Ship {
     }
 
     public boolean isOverlapping(Ship other) {
-        for (Coord coord : other.getCoordList()) {
+        for (Coord coord : other.genCoordList()) {
             if (this.containsCoord(coord)) {
                 return true;
             }
@@ -86,7 +90,7 @@ public class Ship {
     }
 
     public boolean isOnGrid(Grid g) {
-        for (Coord coord : this.getCoordList()) {
+        for (Coord coord : this.genCoordList()) {
             if (coord.row < 1 || coord.row > g.numRows()) return false;
             if (coord.col < 1 || coord.col > g.numCols()) return false;
         }
