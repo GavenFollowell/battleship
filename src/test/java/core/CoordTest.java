@@ -50,6 +50,6 @@ class CoordTest {
         Coord coord = new Coord(1, 2);
         Coord actual = coord.shiftBy(1, 2);
         Coord expected = new Coord(2, 4);
-        assertEquals(true, expected.isEqual(actual));
+        assertTrue(expected.isEqual(actual));
     }
 }

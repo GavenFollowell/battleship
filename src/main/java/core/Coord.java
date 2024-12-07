@@ -36,10 +36,7 @@ public class Coord {
     }
 
     public boolean isEqual(Coord other) {
-        if (this.col == other.col && this.row == other.row) {
-            return true;
-        }
-        return false;
+        return this.col == other.col && this.row == other.row;
     }
 
     public Coord shiftBy(int verticalDistance, int horizontalDistance) {

@@ -71,29 +71,12 @@ public class Ship {
         return coordList;
     }
 
-    public boolean isSunk(Grid grid) {
-        for (Coord coord : coordList) {
-            if (!(grid.get(coord).cellIsHit())) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public boolean isOverlapping(Ship other) {
-        for (Coord coord : other.genCoordList()) {
+        for (Coord coord : other.getCoordList()) {
             if (this.containsCoord(coord)) {
                 return true;
             }
         }
         return false;
-    }
-
-    public boolean isOnGrid(Grid g) {
-        for (Coord coord : this.genCoordList()) {
-            if (coord.row < 1 || coord.row > g.numRows()) return false;
-            if (coord.col < 1 || coord.col > g.numCols()) return false;
-        }
-        return true;
     }
 }

@@ -31,18 +31,12 @@ public class Cell {
 
     // the shot on this cell resulted in a hit
     public boolean cellIsHit() {
-        if (this.hasBeenShot() && this.hasShip()) {
-            return true;
-        }
-        return false;
+        return this.hasBeenShot() && this.hasShip();
     }
 
     // shot on this cell resulted in a miss
     public boolean cellIsMiss() {
-        if (this.hasBeenShot() && !this.hasShip()) {
-            return true;
-        }
-        return false;
+        return this.hasBeenShot() && !this.hasShip();
     }
 
     // Mark the cell as shot

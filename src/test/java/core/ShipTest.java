@@ -48,22 +48,6 @@ class ShipTest {
     }
 
     @Test
-    public void isSunkReturnsTrueIfAllCellsMarkedAsHit() {
-        Grid g = new Grid(5, 5);
-        Coord c1 = new Coord(1, 2);
-        Coord c2 = new Coord(2, 2);
-        Coord c3 = new Coord(3, 2);
-        grid.get(c1).setAsShip();
-        grid.get(c2).setAsShip();
-        grid.get(c3).setAsShip();
-        grid.get(c1).setAsShot();
-        grid.get(c2).setAsShot();
-        assertFalse(ship.isSunk(grid));
-        grid.get(c3).setAsShot();
-        assertTrue(ship.isSunk(grid));
-    }
-
-    @Test
     public void shipOverlapsReturnsTrueWhenShipsOverlap() {
         Coord c1 = new Coord(1, 2);
         Ship otherShip = new Ship(c1, 3, VERTICAL, "BattleShip");
@@ -75,17 +59,5 @@ class ShipTest {
         Coord c1 = new Coord(4, 4);
         Ship otherShip = new Ship(c1, 2, VERTICAL, "BattleShip");
         assertFalse(ship.isOverlapping(otherShip));
-    }
-
-    @Test
-    public void isOnGridReturnsTrueWhenShipIsOnGrid() {
-        assertTrue(ship.isOnGrid(grid));
-    }
-
-    @Test
-    public void isOnGridReturnsFalseWhenShipIsOnGrid() {
-        Coord c1 = new Coord(1, 2);
-        Ship otherShip = new Ship(c1, 6, VERTICAL, "BattleShip");
-        assertFalse(otherShip.isOnGrid(grid));
     }
 }
