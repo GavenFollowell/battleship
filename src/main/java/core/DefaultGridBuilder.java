@@ -5,7 +5,6 @@ import static core.Ship.Direction.VERTICAL;
 
 import java.util.List;
 
-/** Constructor for defaultGrid */
 public class DefaultGridBuilder {
     /**
      * the preset for a 5x5 grid

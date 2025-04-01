@@ -16,20 +16,16 @@ public class Grid implements Bounding {
     @Column(name = "gridId")
     private long id;
 
-    /** The cells in a given horizontal line */
     @Column(name = "row")
     private int rows;
 
-    /** The cells in a given vertical line */
     @Column(name = "cols")
     private int cols;
 
-    /** The individual cell in a group of cells */
     @Convert(converter = CellArrayAttributeConverter.class)
     @Column(name = "cells", columnDefinition = "TEXT")
     private Cell[][] cells;
 
-    /** Holds the list of different ships */
     @ManyToOne
     @JoinColumn(name = "ship_list_id", referencedColumnName = "id")
     private ShipList shipList;
@@ -39,20 +35,11 @@ public class Grid implements Bounding {
         this.cols = 0;
     }
 
-    /**
-     * creates the grid given the 3 parameters
-     *
-     * @param rows are cells on a vertical line
-     * @param cols are cells on a horizontal line
-     * @param shipList is a list of different ships
-     */
     public Grid(final int rows, final int cols, final List<Ship> shipList) {
-
         this.rows = rows;
         this.cols = cols;
 
         cells = new Cell[rows][cols];
-
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 cells[row][col] = new Cell();
@@ -62,7 +49,6 @@ public class Grid implements Bounding {
         this.shipList = new ShipList(shipList);
     }
 
-    /** sets the row and col */
     public Grid(final int rows, final int cols) {
         this(rows, cols, new ArrayList<>());
     }
@@ -73,11 +59,6 @@ public class Grid implements Bounding {
         return cells[row][col];
     }
 
-    /**
-     * gets the status of the cell
-     *
-     * @return whether the cell has been hit
-     */
     public CellStatus getStatus(final Coord coordinate) {
         final Cell cell = getCell(coordinate);
         for (final Ship ship : shipList.getShips()) {
@@ -88,34 +69,26 @@ public class Grid implements Bounding {
         return cell.hasBeenShot() ? CellStatus.EMPTY : CellStatus.UNKNOWN;
     }
 
-    /**
-     * the number of rows in the grid
-     *
-     * @return the number of rows
-     */
     public int numRows() {
         return rows;
     }
 
-    /**
-     * the number of cols in the grid
-     *
-     * @return the number of cols
-     */
     public int numCols() {
         return cols;
     }
 
-    /** adds ship to list */
+    /**
+     * Attempts to add a ship if it's within bounds and doesn't overlap existing ships.
+     *
+     * @param ship the ship to add
+     */
     public void addShip(final Ship ship) {
+        if (!ship.isWithinBounds(this)) {
+            return;
+        }
         shipList.addShip(ship);
     }
 
-    /**
-     * checks if all the ships are sunk
-     *
-     * @return boolean answer for check
-     */
     public boolean allShipsAreSunk() {
         for (final Ship ship : shipList.getShips()) {
             final List<Coord> coords = ship.getCoordList();
@@ -128,21 +101,10 @@ public class Grid implements Bounding {
         return true;
     }
 
-    /**
-     * gets list of ships
-     *
-     * @return the list of ships
-     */
     public List<Ship> getShipList() {
         return shipList.getShips();
     }
 
-    /**
-     * checks if ship is sunk
-     *
-     * @param ship is a ship in list of ships
-     * @return boolean value for ship status
-     */
     public boolean isShipSunk(final Ship ship) {
         for (final Coord coord : ship.getCoordList()) {
             if (!this.getStatus(coord).equals(CellStatus.SHIP_HIT)) {
@@ -173,7 +135,6 @@ public class Grid implements Bounding {
         return optionalShip;
     }
 
-    /** changes status of given cell to shoot */
     public void shoot(final Coord coordinate) {
         final Cell shipCell = getCell(coordinate);
         final CellStatus targetStatus = getStatus(coordinate);

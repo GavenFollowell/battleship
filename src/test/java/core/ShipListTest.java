@@ -33,11 +33,8 @@ class ShipListTest {
 
         assertEquals(shipListOriginal.getShips().size(), shipList2.getShips().size());
         assertEquals(
-                shipListOriginal.getShips().get(0).getName(),
-                shipList2.getShips().get(0).getName());
-        assertEquals(
-                shipListOriginal.getShips().get(1).getName(),
-                shipList2.getShips().get(1).getName());
+                shipListOriginal.getShips().getFirst().getName(),
+                shipList2.getShips().getFirst().getName());
     }
 
     @Test

@@ -8,34 +8,33 @@ import org.junit.jupiter.api.Test;
 
 public class GameTest {
     private DefaultGridBuilder gridBuilder;
-    private Grid firstGrid;
     private Grid secondGrid;
     private Game game;
 
     @BeforeEach
     public void setup() {
-        firstGrid = gridBuilder.defaultGrid();
-        secondGrid = gridBuilder.defaultGrid();
+        Grid firstGrid = DefaultGridBuilder.defaultGrid();
+        secondGrid = DefaultGridBuilder.defaultGrid();
         game = new Game(firstGrid, secondGrid);
     }
 
     @Test
     public void testInitialPlayerIsFirst() {
-        assertEquals(Game.Player.FIRST, game.getCurrent());
+        assertEquals(Game.Player.First, game.getCurrent());
     }
 
     //    @Disabled
     @Test
     public void testNextSwitchesToSecondPlayer() {
         game.next();
-        assertEquals(Game.Player.SECOND, game.getCurrent());
+        assertEquals(Game.Player.Second, game.getCurrent());
     }
 
     @Test
     public void testNextSwitchesBackToFirstPlayer() {
         game.next(); // First -> Second
         game.next(); // Second -> First
-        assertEquals(Game.Player.FIRST, game.getCurrent());
+        assertEquals(Game.Player.First, game.getCurrent());
     }
 
     @Test

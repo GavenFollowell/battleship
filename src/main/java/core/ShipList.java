@@ -19,8 +19,33 @@ public class ShipList {
         this.ships.addAll(ships);
     }
 
-    public void addShip(Ship ship) {
+    /**
+     * Adds a ship to the list only if it does not overlap with existing ships
+     *
+     * @param ship the ship to add
+     * @return true if successfully added, false otherwise
+     *     <p>✅ CHANGED: Now returns a boolean and checks for overlaps using isOverlapping
+     */
+    public boolean addShip(Ship ship) {
+        if (isOverlapping(ship)) {
+            return false;
+        }
         ships.add(ship);
+        return true;
+    }
+
+    /**
+     * Checks if the given ship overlaps with any existing ships
+     *
+     * <p>✅ ADDED: Helper method to assist in validating ship overlap
+     */
+    public boolean isOverlapping(Ship newShip) {
+        for (Ship existing : ships) {
+            if (existing.isOverlapping(newShip)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public List<Ship> getShips() {

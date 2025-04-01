@@ -1,9 +1,12 @@
 package core;
 
-/** Describes the state of the {@link Cell} */
 public enum CellStatus {
-    UNKNOWN,
-    EMPTY,
+    Unknown,
+    Empty,
+    ShipUnrevealed,
+    SHIP_HIT,
     SHIP_UNREVEALED,
-    SHIP_HIT
+    EMPTY,
+    UNKNOWN,
+    ShipHit
 }

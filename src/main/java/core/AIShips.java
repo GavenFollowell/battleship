@@ -5,24 +5,16 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * AIShips is an AI that places ships on an empty grid.
- *
- * <p>This Class is Used with the {@link Grid}
- *
- * <p>class and {@link ShipSpec} class in order to function
+ * AIShips is an AI that places ships on an empty grid. This Class is Used with the {@link Grid}
+ * class and {@link ShipSpec} class in order to function
  *
  * @link grid hold size
  * @link ships is a list of ship names
  * @link shipSpecs an array of ship sizes
  */
 class AIShips {
-    /** A grid for AIShips to be placed */
     private final Grid grid;
-
-    /** A list that contains ships that are on the grid */
     private final List<Ship> ships;
-
-    /** An array of a ships specifications */
     private final ShipSpec[] shipSpecs;
 
     /**
@@ -39,9 +31,8 @@ class AIShips {
     }
 
     /**
-     * AI function, it places the ships on the empty grid provided.
-     *
-     * <p>Must be called in order to place ships
+     * AI function, it places the ships on the empty grid provided. Must be called in order to place
+     * ships.
      */
     public void setShips() {
         final int maxNumberOfTries = 10;
@@ -65,7 +56,7 @@ class AIShips {
 
     @SuppressWarnings("PMD.AvoidThrowingRawExceptionTypes")
     private void checkShipSizes() {
-        for (final ShipSpec shipSpec : shipSpecs) {
+        for (ShipSpec shipSpec : shipSpecs) {
             if (shipSpec.size > grid.numRows() || shipSpec.size > grid.numCols()) {
                 throw new RuntimeException("INVALID SHIP SIZES GIVEN");
             }
@@ -92,7 +83,7 @@ class AIShips {
         return random.nextBoolean() ? Ship.Direction.VERTICAL : Ship.Direction.HORIZONTAL;
     }
 
-    private boolean conflicts(final Ship newShip) {
+    private boolean conflicts(Ship newShip) {
         for (final Ship ship : ships) {
             if (newShip.isOverlapping(ship)) {
                 return true;
